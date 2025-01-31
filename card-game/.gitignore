@@ -1,0 +1,11 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# opencv specific ignores
+bin/opencv_world4110.dll
+bin/opencv_world4110.lib
+bin/opencv_world4110.pdb
+bin/opencv_world4110d.dll
+bin/opencv_world4110d.lib
+bin/opencv_world4110d.pdb

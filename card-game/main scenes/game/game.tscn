@@ -1,0 +1,87 @@
+[gd_scene load_steps=9 format=3 uid="uid://bjpb2n5gspk41"]
+
+[ext_resource type="Script" path="res://main scenes/game/game.gd" id="1_j56x8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rhvkk"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_5twyu"]
+sky_material = SubResource("ProceduralSkyMaterial_rhvkk")
+
+[sub_resource type="Environment" id="Environment_t35mo"]
+background_mode = 2
+sky = SubResource("Sky_5twyu")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0adq1"]
+albedo_color = Color(0.17568, 0.72, 0.1152, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qdt2l"]
+material = SubResource("StandardMaterial3D_0adq1")
+size = Vector2(1.43, 0.805)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_378he"]
+albedo_color = Color(1, 0.34, 0.34, 1)
+metallic_specular = 0.17
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_lbq18"]
+material = SubResource("StandardMaterial3D_378he")
+radius = 0.025
+height = 0.075
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_j56x8")
+
+[node name="OpenCVInstance" type="OpenCVInstance" parent="."]
+
+[node name="UiLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="UiLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_t35mo")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.508515, -0.67252, 0.537707, -0.12941, 0.677075, 0.724446, -0.851273, 0.298807, -0.431334, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_mode = 0
+directional_shadow_max_distance = 110.0
+
+[node name="World" type="Node3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+
+[node name="Floor" type="MeshInstance3D" parent="World"]
+mesh = SubResource("PlaneMesh_qdt2l")
+skeleton = NodePath("../..")
+
+[node name="Figure" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.096, 0.0367024, 0)
+mesh = SubResource("CapsuleMesh_lbq18")
+
+[node name="Figure2" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46657, 0.0367024, 0.18948)
+mesh = SubResource("CapsuleMesh_lbq18")
+
+[node name="Figure3" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.434657, 0.0367024, -0.217843)
+mesh = SubResource("CapsuleMesh_lbq18")
+
+[node name="Figure4" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.142919, 0.0367886, 0)
+mesh = SubResource("CapsuleMesh_lbq18")
+
+[node name="Figure5" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.666996, 0.0367024, 0.334919)
+mesh = SubResource("CapsuleMesh_lbq18")
+
+[node name="Figure6" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.669591, 0.0367024, -0.354438)
+mesh = SubResource("CapsuleMesh_lbq18")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 86.55, 0)
+fov = 50.0
